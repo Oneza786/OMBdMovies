@@ -5,22 +5,93 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Movies</title>
+    <style>
+        #head
+        {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        #search
+        {
+            height: 100px;
+           margin-left: 350px;
+        }
+        input
+        {
+            padding: 10px;
+        }
+        button
+        {
+            margin-top: 30px;
+            margin-left: 230px;
+            /* padding: 10px; */
+            padding-left: 20px;
+            padding-right: 20px;
+            padding-top: 10px;
+            padding-bottom: 10px;
+            background-color: black;
+            color: white;
+            font-size: 20px;
+            border: none;
+            border-radius: 10px;
+        }
+    </style>
 </head>
 <body>
-    
+    <div id="head">
+        <h1>Welcome to OMDb Movies</h1>
+    </div>
+    <div id="search">
+        <label for="">
+            Movie name 
+            <input type="text" id="name" placeholder="Enter Movie name">
+        </label>
+        <label for="">
+            Year of Release
+            <input type="number" placeholder="Enter Year">
+        </label>
+        <br>
+        <button onclick="getMovie()">Submit</button>
+    </div>
+    <div id="movieDiv"></div>
 </body>
 </html>
 
 <script>
-    // const url="http://www.omdbapi.com/?apikey=692e6b93&"
+    
     const url="http://www.omdbapi.com/?i=tt3896198&apikey=692e6b93";
-    fetch(url)
-    .then(function(res)
+    function getMovie()
     {
-        return res.json();
-    })
-    .then(function(res)
+        fetch(url)
+        .then(function(res)
+        {
+            return res.json();
+        })
+        .then(function(res)
+        {
+            console.log(res);
+            append(res);
+        })
+        .catch(function(err)
+        {
+
+        })
+    }
+
+    function append(data)
     {
-        console.log(res);
-    })
+        let myDiv=document.getElementById("movieDiv");
+
+        let img=document.createElement("img");
+        img.src=data.Poster;
+
+        let name=document.createElement("h3");
+        name.innerText=data.Title;
+
+        let year=document.createElement("h4");
+        year.innerText=data.Year;
+
+        myDiv.append(img,poster,year)
+    }
+    
 </script>
