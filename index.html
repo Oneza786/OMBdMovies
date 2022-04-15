@@ -40,8 +40,8 @@
             /* height: 450px; */
             width: 350px;
             margin-top: 50px;
-            margin-left: 450px;
-            border-radius: 15px;
+            margin-left: 460px;
+            /* border-radius: 15px; */
             box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
             /* padding: 20px; */
         }
@@ -87,30 +87,52 @@
         })
         .catch(function(err)
         {
-
+            append(err);
         })
     }
 
     function append(data)
     {
+        if(data.Title===undefined)
+        {
+            let myDiv=document.getElementById("movieDiv");
+            myDiv.innerHTML=null; 
+            let error=document.createElement("img");
+            error.src="https://us.123rf.com/450wm/studiostoks/studiostoks1602/studiostoks160200045/51904057-oops-surprised-woman-pop-art-retro-style-unexpected-news-business-concept.jpg?ver=6";
+            error.style.maxWidth="100%"
+            let errMsg=document.createElement("h3");
+            errMsg.innerText="No Movie Found. Please Try Again!!!";
+            errMsg.style.textAlign="center"
+            myDiv.append(error,errMsg)
+        }
+        else
+        {
+            let myDiv=document.getElementById("movieDiv");
+            myDiv.innerHTML=null;
+            myDiv.style.height="720px"
+            let img=document.createElement("img");
+            img.src=data.Poster;
+            img.style.width="100%"
+
+            let name=document.createElement("h3");
+            name.innerText=`Movie Name: ${data.Title}`;
+            name.style.textAlign="center";
+
+            let year=document.createElement("h4");
+            year.innerText=`Release Date: ${data.Year}`;
+            year.style.textAlign="center";
+
+            let lang=document.createElement("h4");
+            lang.innerText=`Language: ${data.Language}`;
+            lang.style.textAlign="center";
+
+            let rating=document.createElement("h4");
+            rating.innerText=`Rating: ${data.imdbRating}`;
+            rating.style.textAlign="center";
+
+            myDiv.append(img,name,year,lang,rating)
+        }
         
-        let myDiv=document.getElementById("movieDiv");
-        myDiv.innerHTML=null;
-        myDiv.style.height="550px"
-        let img=document.createElement("img");
-        img.src=data.Poster;
-        img.style.paddingLeft="25px"
-
-        let name=document.createElement("h3");
-        name.innerText=data.Title;
-        name.style.textAlign="center";
-
-        let year=document.createElement("h4");
-        year.innerText=data.Year;
-        year.style.textAlign="center";
-
-
-        myDiv.append(img,name,year)
     }
     
 </script>
