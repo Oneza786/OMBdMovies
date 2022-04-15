@@ -35,6 +35,16 @@
             border: none;
             border-radius: 10px;
         }
+        #movieDiv
+        {
+            /* height: 450px; */
+            width: 350px;
+            margin-top: 50px;
+            margin-left: 450px;
+            border-radius: 15px;
+            box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+            /* padding: 20px; */
+        }
     </style>
 </head>
 <body>
@@ -44,7 +54,7 @@
     <div id="search">
         <label for="">
             Movie name 
-            <input type="text" id="name" placeholder="Enter Movie name">
+            <input type="text" id="movieName" placeholder="Enter Movie name">
         </label>
         <label for="">
             Year of Release
@@ -59,9 +69,12 @@
 
 <script>
     
-    const url="http://www.omdbapi.com/?i=tt3896198&apikey=692e6b93";
     function getMovie()
     {
+        
+        let name=document.getElementById("movieName").value;
+        const url=`http://www.omdbapi.com/?t=${name}&apikey=41ab18cf`;
+    //    const url="http://www.omdbapi.com/?i=tt3896198&apikey=692e6b93";
         fetch(url)
         .then(function(res)
         {
@@ -80,18 +93,24 @@
 
     function append(data)
     {
+        
         let myDiv=document.getElementById("movieDiv");
-
+        myDiv.innerHTML=null;
+        myDiv.style.height="550px"
         let img=document.createElement("img");
         img.src=data.Poster;
+        img.style.paddingLeft="25px"
 
         let name=document.createElement("h3");
         name.innerText=data.Title;
+        name.style.textAlign="center";
 
         let year=document.createElement("h4");
         year.innerText=data.Year;
+        year.style.textAlign="center";
 
-        myDiv.append(img,poster,year)
+
+        myDiv.append(img,name,year)
     }
     
 </script>
