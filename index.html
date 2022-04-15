@@ -109,7 +109,7 @@
         {
             let myDiv=document.getElementById("movieDiv");
             myDiv.innerHTML=null;
-            myDiv.style.height="720px"
+            myDiv.style.height="750px"
             let img=document.createElement("img");
             img.src=data.Poster;
             img.style.width="100%"
@@ -129,8 +129,18 @@
             let rating=document.createElement("h4");
             rating.innerText=`Rating: ${data.imdbRating}`;
             rating.style.textAlign="center";
-
-            myDiv.append(img,name,year,lang,rating)
+            if(data.imdbRating>8.5)
+            {
+                let recom=document.createElement("h3")
+                recom.innerText="Recommended"
+                recom.style.textAlign="center";
+                myDiv.append(img,name,year,lang,rating,recom)
+            }
+            else
+            {
+                myDiv.append(img,name,year,lang,rating);
+            }
+            
         }
         
     }
